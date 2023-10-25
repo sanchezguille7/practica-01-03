@@ -26,6 +26,9 @@ sed -i "s/database_name_here/$DB_NAME/" /var/www/html/config.php
 sed -i "s/username_here/$DB_USER/" /var/www/html/config.php
 sed -i "s/password_here/$DB_PASSWORD/" /var/www/html/config.php
 
+# Modificamos el script de base de datos
+sed -i "s/lamp_db/$DB_NAME/" /tmp/iaw-practica-lamp/db/database.sql
+
 # Importamos el script de base de datos
 mysql -u root < /tmp/iaw-practica-lamp/db/database.sql
 
@@ -33,3 +36,6 @@ mysql -u root < /tmp/iaw-practica-lamp/db/database.sql
 mysql -u root <<< "DROP USER IF EXISTS $DB_USER@'%'"
 mysql -u root <<< "CREATE USER $DB_USER@'%' IDENTIFIED BY '$DB_PASSWORD'"
 mysql -u root <<< "GRANT ALL PRIVILEGES ON $DB_NAME.* TO $DB_USER@'%'"
+
+# Modificamos el propietaario y el grupo del directorio /var/www/html
+chown -R www-data:www-data /var/www/html

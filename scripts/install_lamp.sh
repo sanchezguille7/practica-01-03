@@ -36,6 +36,3 @@ cp ../php/index.php /var/www/html
 
 # Modificamos el propietario
 chown -R www-data:www-data /var/www/html
-
-
-
